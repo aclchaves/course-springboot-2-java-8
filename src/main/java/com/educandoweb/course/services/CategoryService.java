@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.Repositories.CategoryRepository;
 import com.educandoweb.course.entities.Category;
-import com.educandoweb.course.entities.User;
 import com.educandoweb.course.services.exceptions.DatabaseException;
 import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
 
@@ -42,8 +41,7 @@ public class CategoryService {
 			throw new ResourceNotFoundException(id);
 		}catch (DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
-		}
-		
+		}		
 	}
 	
 	public Category update(Long id, Category obj) {
@@ -53,8 +51,7 @@ public class CategoryService {
 			return repository.save(entity);
 		}catch(EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
-		}
-		
+		}		
 	}
 
 	private void updateData(Category entity, Category obj) {
