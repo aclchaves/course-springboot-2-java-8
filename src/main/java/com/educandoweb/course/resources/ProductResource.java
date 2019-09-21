@@ -17,7 +17,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.educandoweb.course.dto.ProductCategoriesDTO;
 import com.educandoweb.course.dto.ProductDTO;
-import com.educandoweb.course.dto.UserDTO;
 import com.educandoweb.course.services.ProductService;
 
 @RestController
