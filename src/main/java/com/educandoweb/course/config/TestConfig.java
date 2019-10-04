@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.educandoweb.course.Repositories.CategoryRepository;
 import com.educandoweb.course.Repositories.OrderItemRepository;
@@ -27,6 +28,9 @@ import com.educandoweb.course.entities.enums.OrderStatus;
 @Profile("test")
 public class TestConfig implements CommandLineRunner{
 
+	@Autowired
+	private BCryptPasswordEncoder passwordEncode;
+	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -68,12 +72,10 @@ public class TestConfig implements CommandLineRunner{
 		p4.getCategories().add(cat3);
 		p5.getCategories().add(cat2);
 		
-		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));		
 		
-		
-		
-		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "98888888", "123456");
-		User u2 = new User(null, "Alex Green", "alex@gmail.com", "97777777", "123456");
+		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "98888888",passwordEncode.encode("123456"));
+		User u2 = new User(null, "Alex Green", "alex@gmail.com", "97777777", passwordEncode.encode("123456"));
 		
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		
