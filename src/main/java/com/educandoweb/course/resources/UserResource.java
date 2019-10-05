@@ -29,6 +29,7 @@ public class UserResource {
 	@Autowired
 	private UserService service;
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping	
 	public ResponseEntity<List<UserDTO>> findAll(){
 		List<UserDTO> list = service.findAll();
@@ -49,6 +50,7 @@ public class UserResource {
 		return ResponseEntity.created(uri).body(newDto);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		service.delete(id);
