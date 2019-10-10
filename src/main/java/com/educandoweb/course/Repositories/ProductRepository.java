@@ -14,6 +14,7 @@ import com.educandoweb.course.entities.Product;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 	
 	@Transactional(readOnly = true)	
+	@Query("SELECT DISTINCT obj FROM Product obj INNER JOIN obj.categories cats WHERE LOWER(obj.name) LIKE LOWER(CONCAT('%',:name,'%')) AND cats IN :categories ")
 	Page<Product> findByNameContainingIgnoreCaseAndCategoriesIn(String name,List<Category> categories, Pageable pageable);
 	
 	@Transactional(readOnly = true)
