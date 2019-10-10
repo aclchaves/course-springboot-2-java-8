@@ -32,8 +32,8 @@ public class ProductService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	public Page<ProductDTO> findAllPaged(Pageable pageable) {
-		Page<Product> list = repository.findAll(pageable);
+	public Page<ProductDTO> findAllPaged(String name, Pageable pageable) {
+		Page<Product> list = repository.findByNameContainingIgnoreCaseAndCategoriesIn(name, pageable);
 		return list.map(e -> new ProductDTO(e));
 	}
 
